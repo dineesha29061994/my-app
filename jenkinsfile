@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages{
+        stage("git"){
+            steps{
+                git credentialsId: 'git-cred', url: 'https://github.com/dineesha29061994/my-app'
+            }
+        }
+        stage("maven"){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage("tomcat"){
+            steps{
+                sshagent(['tomcat-dev'])  {
+                // copy
+                sh "scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.5.42:/opt/tomcat3/webapps"
+                // stop
+                sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.5.42 /opt/tomcat3/bin/shutdown.sh"
+                // start
+                sh "ssh ec2-user@172.31.5.42 /opt/tomcat3/bin/startup.sh"
+}
+            }
+        }
+    }
+}
