@@ -31,9 +31,9 @@ parameters {
 				}
 			}
 			steps{
-				sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@tomcat-priv-IP:/opt/tomc/webapps'
-				sh 'ssh ec2-user@tomcat-priv-IP /opt/tomcat3/bin/shutdown.sh'
-				sh 'ssh ec2-user@tomcat-priv-IP /opt/tomcat3/bin/startup.sh'
+				sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.5.42:/opt/tomc/webapps'
+				sh 'ssh ec2-user@172.31.5.42 /opt/tomcat3/bin/shutdown.sh'
+				sh 'ssh ec2-user@172.31.5.42 /opt/tomcat3/bin/startup.sh'
 			}
 		}
 	}
