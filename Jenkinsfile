@@ -11,7 +11,7 @@ parameters {
 				}
 			}
 			steps{
-				git url:https://github.com/ravi057/myapp-2022
+				git url:"https://github.com/javahometech/my-app.git"
 			}
 		}
 		stage("maven"){
@@ -31,9 +31,9 @@ parameters {
 				}
 			}
 			steps{
-				sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@tomcat-priv-IP:/opt/tomcat9/webapps'
-				sh 'ssh ec2-user@tomcat-priv-IP /opt/tomcat9/bin/shutdown.sh'
-				sh 'ssh ec2-user@tomcat-priv-IP /opt/tomcat9/bin/startup.sh'
+				sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@tomcat-priv-IP:/opt/tomc/webapps'
+				sh 'ssh ec2-user@tomcat-priv-IP /opt/tomcat3/bin/shutdown.sh'
+				sh 'ssh ec2-user@tomcat-priv-IP /opt/tomcat3/bin/startup.sh'
 			}
 		}
 	}
